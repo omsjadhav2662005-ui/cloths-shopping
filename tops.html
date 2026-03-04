@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Tops Collection</title>
+
+<style>
+body{font-family:Arial;background:#ffe6f0;margin:0}
+
+/* HEADER */
+.header{
+  background:#ff4da6;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* COLLECTION */
+.product-section{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+select{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ff80b3;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.product-card{
+  background:#fff;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.product-card:hover{transform:translateY(-6px);}
+.product-card img{width:100%;border-radius:10px;}
+.product-name{font-weight:bold;color:#b30059;margin-top:10px;}
+.product-price{color:#ff4da6;font-weight:bold;margin:5px 0}
+
+/* FULL PRODUCT VIEW */
+#productView{
+  display:none;
+  max-width:1100px;
+  margin:40px auto;
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:40px;
+  align-items:center;
+}
+
+#productView img{
+  width:380px;
+  border-radius:15px;
+}
+
+.details{flex:1;}
+
+.price{
+  font-size:28px;
+  color:#ff4da6;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.sizes button{
+  border:1px solid #ccc;
+  background:white;
+  padding:10px 15px;
+  margin-right:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.sizes button.active{
+  border-color:#ff4da6;
+  color:#ff4da6;
+  font-weight:bold;
+}
+
+.btn{
+  background:#ff4da6;
+  color:white;
+  padding:14px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin-right:15px;
+}
+
+.back{
+  background:#e0e0e0;
+  color:#333;
+  margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Tops Collection</div>
+
+<!-- COLLECTION -->
+<div class="product-section" id="collection">
+
+<div class="controls">
+<select id="filter">
+<option value="all">All</option>
+<option value="cotton">Cotton</option>
+<option value="chiffon">Chiffon</option>
+<option value="linen">Linen</option>
+</select>
+
+<select id="sort">
+<option value="latest">Latest</option>
+<option value="low-high">Price: Low to High</option>
+<option value="high-low">Price: High to Low</option>
+<option value="az">Name: A-Z</option>
+</select>
+</div>
+
+<div class="product-grid" id="products"></div>
+</div>
+
+<!-- FULL VIEW -->
+<div id="productView">
+
+<button class="btn back" onclick="goBack()">⬅ Back to Collection</button>
+
+<div class="product-container">
+<img id="pImg">
+<div class="details">
+<h1 id="pName"></h1>
+<p class="price" id="pPrice"></p>
+
+<h3>Select Size</h3>
+<div class="sizes">
+<button onclick="selectSize(this)">S</button>
+<button onclick="selectSize(this)">M</button>
+<button onclick="selectSize(this)">L</button>
+<button onclick="selectSize(this)">XL</button>
+</div>
+<br><br>
+
+<button class="btn" onclick="addToCart()">Add to Cart</button>
+<button class="btn" onclick="window.location='payment.html'">Buy Now</button>
+
+</div>
+</div>
+</div>
+
+<script>
+
+const productsData = [
+  { name:"Cotton Casual Top", price:799, category:"cotton", img:"t1.avif" },
+  { name:"Chiffon Party Top", price:1199, category:"chiffon", img:"t2.avif" },
+  { name:"Printed Cotton Top", price:899, category:"cotton", img:"t3.avif" },
+  { name:"Designer Chiffon Top", price:1399, category:"chiffon", img:"t4.avif" },
+  { name:"Daily Wear Cotton Top", price:699, category:"cotton", img:"t5.avif" },
+  { name:"Elegant Linen Top", price:1299, category:"linen", img:"t6.avif" },
+  { name:"Floral Cotton Top", price:999, category:"cotton", img:"t7.avif" },
+  { name:"Festive Chiffon Top", price:1499, category:"chiffon", img:"t8.avif" },
+  { name:"Minimal Linen Top", price:1099, category:"linen", img:"t9.avif" },
+  { name:"Trendy Cotton Top", price:949, category:"cotton", img:"t10.avif" },
+  { name:"Ethnic Linen Top", price:1399, category:"linen", img:"t11.avif" },
+  { name:"Luxury Chiffon Top", price:1699, category:"chiffon", img:"t12.avif" }
+];
+
+let filteredProducts = [...productsData];
+let selectedProduct = null;
+
+const container = document.getElementById("products");
+
+function renderProducts(){
+  container.innerHTML="";
+  filteredProducts.forEach((p)=>{
+    container.innerHTML+=`
+      <div class="product-card" onclick="showProduct('${p.name}')">
+        <img src="${p.img}">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price}</div>
+      </div>
+    `;
+  });
+}
+
+renderProducts();
+
+/* FILTER */
+document.getElementById("filter").onchange = function(){
+  const value=this.value;
+  filteredProducts = value==="all"
+    ? [...productsData]
+    : productsData.filter(p=>p.category===value);
+  applySort();
+};
+
+/* SORT */
+document.getElementById("sort").onchange = applySort;
+
+function applySort(){
+  const sortValue=document.getElementById("sort").value;
+
+  if(sortValue==="low-high")
+    filteredProducts.sort((a,b)=>a.price-b.price);
+
+  if(sortValue==="high-low")
+    filteredProducts.sort((a,b)=>b.price-a.price);
+
+  if(sortValue==="az")
+    filteredProducts.sort((a,b)=>a.name.localeCompare(b.name));
+
+  if(sortValue==="latest")
+    filteredProducts=[...filteredProducts];
+
+  renderProducts();
+}
+
+/* SHOW PRODUCT */
+function showProduct(name){
+  selectedProduct = productsData.find(p=>p.name===name);
+  collection.style.display="none";
+  productView.style.display="block";
+  pImg.src=selectedProduct.img;
+  pName.textContent=selectedProduct.name;
+  pPrice.textContent="₹"+selectedProduct.price;
+}
+
+/* BACK */
+function goBack(){
+  productView.style.display="none";
+  collection.style.display="block";
+}
+
+/* SIZE */
+function selectSize(btn){
+  document.querySelectorAll(".sizes button")
+  .forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+/* CART */
+function addToCart(){
+  alert("Added to Cart: "+selectedProduct.name);
+}
+
+</script>
+
+</body>
+</html>

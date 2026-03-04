@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Boys Sweatshirts Collection</title>
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial;
+      background: #fff0f6;
+      margin: 0;
+      color: #333;
+    }
+
+    .header {
+      background: #ff4da6;
+      color: white;
+      padding: 15px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .product-section {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+    }
+
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 25px;
+    }
+
+    .product-card {
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+      padding: 15px;
+      cursor: pointer;
+      transition: .3s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .product-card img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .product-name {
+      font-weight: 600;
+      margin-top: 10px;
+      color: #b30059;
+    }
+
+    .product-price {
+      color: #ff4da6;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+
+    /* PRODUCT VIEW */
+
+    #productView {
+      display: none;
+      max-width: 1100px;
+      margin: 40px auto;
+      background: white;
+      padding: 35px;
+      border-radius: 18px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      align-items: center;
+    }
+
+    #productView img {
+      width: 380px;
+      border-radius: 15px;
+    }
+
+    .details {
+      flex: 1;
+    }
+
+    .price {
+      font-size: 28px;
+      color: #ff4da6;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+
+    .sizes button {
+      border: 1px solid #ccc;
+      background: white;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .sizes button.active {
+      border-color: #ff4da6;
+      color: #ff4da6;
+      font-weight: bold;
+    }
+
+    .btn {
+      background: #ff4da6;
+      color: white;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 30px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .back {
+      background: #e0e0e0;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    /* SORT */
+
+    .sort-container {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 20px;
+    }
+
+    .sort-select {
+      background: white;
+      border: 2px solid #ff4da6;
+      color: #b30059;
+      padding: 8px 14px;
+      border-radius: 25px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="header">Kids Boys Sweatshirts Collection 🧥</div>
+
+  <!-- COLLECTION -->
+  <div id="collection" class="product-section">
+
+    <div class="sort-container">
+      <select class="sort-select" onchange="sortProducts(this.value)">
+        <option value="">Sort By</option>
+        <option value="low">Price: Low → High</option>
+        <option value="high">Price: High → Low</option>
+        <option value="az">Name: A → Z</option>
+        <option value="za">Name: Z → A</option>
+      </select>
+    </div>
+
+    <div id="products" class="product-grid"></div>
+
+  </div>
+
+  <!-- PRODUCT FULL VIEW -->
+
+  <div id="productView">
+
+    <button class="btn back" onclick="goBack()">⬅ Back</button>
+
+    <div class="product-container">
+
+      <img id="pImg">
+
+      <div class="details">
+        <h1 id="pName"></h1>
+        <p class="price" id="pPrice"></p>
+
+        <h3>Select Size</h3>
+
+        <div class="sizes">
+          <button onclick="selectSize(this)">2-3Y</button>
+          <button onclick="selectSize(this)">4-5Y</button>
+          <button onclick="selectSize(this)">6-7Y</button>
+          <button onclick="selectSize(this)">8-9Y</button>
+          <button onclick="selectSize(this)">10-11Y</button>
+        </div>
+
+        <button class="btn" onclick="addToCart()">Add to Cart</button>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+
+    const productsData = [
+      { name: "Cartoon Print Sweatshirt", price: 599, img: "boys_sw1.avif" },
+      { name: "Hooded Winter Sweatshirt", price: 799, img: "boys_sw2.avif" },
+      { name: "Sports Theme Sweatshirt", price: 699, img: "boys_sw3.avif" },
+      { name: "Dinosaur Print Sweatshirt", price: 649, img: "boys_sw4.avif" },
+      { name: "Color Block Sweatshirt", price: 729, img: "boys_sw5.avif" },
+      { name: "Warm Fleece Sweatshirt", price: 849, img: "boys_sw6.avif" },
+      { name: "Superhero Sweatshirt", price: 699, img: "boys_sw7.avif" },
+      { name: "Striped Casual Sweatshirt", price: 629, img: "boys_sw8.avif" },
+      { name: "Adventure Print Sweatshirt", price: 679, img: "boys_sw9.avif" },
+      { name: "Premium Winter Sweatshirt", price: 899, img: "boys_sw10.avif" },
+      { name: "Animal Print Sweatshirt", price: 649, img: "boys_sw11.avif" },
+      { name: "Festive Special Sweatshirt", price: 799, img: "boys_sw12.avif" }
+    ];
+
+    const container = document.getElementById("products");
+
+    function renderProducts() {
+      container.innerHTML = "";
+      productsData.forEach((p, i) => {
+        container.innerHTML += `
+      <div class="product-card" onclick="showProduct(${i})">
+        <img src="${p.img}">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price}</div>
+      </div>
+    `;
+      });
+    }
+
+    function sortProducts(type) {
+      if (type === "low") productsData.sort((a, b) => a.price - b.price);
+      if (type === "high") productsData.sort((a, b) => b.price - a.price);
+      if (type === "az") productsData.sort((a, b) => a.name.localeCompare(b.name));
+      if (type === "za") productsData.sort((a, b) => b.name.localeCompare(a.name));
+      renderProducts();
+    }
+
+    renderProducts();
+
+    function showProduct(i) {
+      const p = productsData[i];
+      document.getElementById("collection").style.display = "none";
+      document.getElementById("productView").style.display = "block";
+
+      document.getElementById("pImg").src = p.img;
+      document.getElementById("pName").textContent = p.name;
+      document.getElementById("pPrice").textContent = "₹" + p.price;
+    }
+
+    function goBack() {
+      document.getElementById("productView").style.display = "none";
+      document.getElementById("collection").style.display = "block";
+    }
+
+    function selectSize(btn) {
+      document.querySelectorAll(".sizes button")
+        .forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+    }
+
+    function addToCart() {
+      alert("Product added to cart 🛒");
+    }
+
+  </script>
+
+</body>
+
+</html>

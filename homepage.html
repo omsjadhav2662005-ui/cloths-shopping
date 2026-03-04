@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clothing Store</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+
+</head>
+
+<body>
+
+  <div id="splash">
+    <img src="logo.img.png" alt="Clothing Store Logo">
+  </div>
+  <!-- Limeroad-style Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm px-4 py-4">
+    <!---- <a class="navbar-brand fw-bold fs-3 text-dark" href="#">Clothing<span class="text-secondary">Store</span></a>-->
+    <img src="logo.img.png" alt="ClothingStore Logo" class="logo">
+
+    <div class="collapse navbar-collapse justify-content-center">
+      <ul class="navbar-nav gap-5 fw-semibold">
+
+        <!-- WOMEN dropdown -->
+        <li class="nav-item dropdown position-static">
+          <a class="nav-link dropdown-toggle text dark" href="#" role="button">
+            WOMEN
+          </a>
+          <div class="dropdown-menu w-100 mt-0 border-0 shadow-lg p-4 mega-menu">
+            <div class="row">
+              <div class="col-md-2">
+                <h6 class="fw-bold">Ethnic Wear</h6>
+                <a class="dropdown-item" href="kurtas page.html">Kurta Kurtis</a>
+                <a class="dropdown-item" href="saree page.html">Sarees</a>
+                <a class="dropdown-item" href="lehnga.html">Lehengas</a>
+                <a class="dropdown-item" href="co-ord set.html">Ethnics co ord set</a>
+                <a class="dropdown-item" href="Duppatas.html">Dupattas</a>
+              </div>
+              <div class="col-md-2">
+                <h6 class="fw-bold">Western Wear</h6>
+                <a class="dropdown-item" href="tops.html">Tops</a>
+                <a class="dropdown-item" href="dresses.html">Dresses</a>
+                <a class="dropdown-item" href="jumpsuits.html">Jumpsuits</a>
+                <a class="dropdown-item" href="tunics.html">Tunics</a>
+                <a class="dropdown-item" href="shrugs.html">Shrugs</a>
+              </div>
+              <div class="col-md-2">
+                <h6 class="fw-bold">Sports & Activewear</h6>
+                <a class="dropdown-item" href="trackpants.html">Track Pants</a>
+                <a class="dropdown-item" href="joggers.html">Joggers</a>
+                <a class="dropdown-item" href="tights.html">Tights</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- MEN dropdown -->
+        <li class="nav-item dropdown position-static">
+          <a class="nav-link dropdown-toggle text-dark" href="#" role="button">
+            MEN
+          </a>
+          <div class="dropdown-menu w-100 mt-0 border-0 shadow-lg p-4 mega-menu">
+            <div class="row">
+              <div class="col-md-2">
+                <h6 class="fw-bold">Top Wear</h6>
+                <a class="dropdown-item" href="tshirt men.html">T-Shirts</a>
+                <a class="dropdown-item" href="shirt men.html">Shirts</a>
+                <a class="dropdown-item" href="jacket.html">Jackets</a>
+                <a class="dropdown-item" href="sweatshirt.html">Sweatshirts</a>
+              </div>
+              <div class="col-md-2">
+                <h6 class="fw-bold">Bottom Wear</h6>
+                <a class="dropdown-item" href="jeans men.html">Jeans</a>
+                <a class="dropdown-item" href="trousers men.html">Trousers</a>
+                <a class="dropdown-item" href="shorts men.html">Shorts</a>
+                <a class="dropdown-item" href="joggers men.html">Joggers</a>
+              </div>
+              <div class="col-md-2">
+                <h6 class="fw-bold">Indian & Festive</h6>
+                <a class="dropdown-item" href="kurta men.html">Kurta</a>
+                <a class="dropdown-item" href="sherwani men.html">Sherwani</a>
+                <a class="dropdown-item" href="nehru jackets.html">Nehru Jackets</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <!-- KIDS dropdown -->
+        <li class="nav-item dropdown position-static">
+          <a class="nav-link dropdown-toggle text-dark" href="#" role="button">
+            KIDS
+          </a>
+          <div class="dropdown-menu w-100 mt-0 border-0 shadow-lg p-4 mega-menu">
+            <div class="row">
+              <div class="col-md-3">
+                <h6 class="fw-bold">Girls Clothing</h6>
+                <a class="dropdown-item" href="kids dress girl.html">Dresses</a>
+                <a class="dropdown-item" href="kids saree.html">Ethnic Wear</a>
+                <a class="dropdown-item" href="partywear kids girl.html">Party Wear</a>
+                <a class="dropdown-item" href="kids girl sweatshirts.html">Sweatshirt</a>
+                <a class="dropdown-item" href="kids nightwear girls.html">Nightwear</a>
+              </div>
+              <div class="col-md-3">
+                <h6 class="fw-bold">Boys Clothing</h6>
+                <a class="dropdown-item" href="boys tshirts.html">Tshirt</a>
+                <a class="dropdown-item" href="boys shirt.html">Shirts</a>
+                <a class="dropdown-item" href="ethnic wear kids.html">Ethnic Wear</a>
+                <a class="dropdown-item" href="boys sweatshirts kids.html">Sweatshirt</a>
+                <a class="dropdown-item" href="kids jacket boys.html">Jackets</a>
+                <a class="dropdown-item" href="boys nightwear kids.html">Nightwear</a>
+              </div>
+            </div>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-dark" href="offers.html">Offers</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Right-side icons -->
+    <div class="d-flex align-items-center gap-4">
+      <a href="search page.html" class="text-dark text-decoration-none text-center small">
+        <div>🔍</div>
+        <div>SEARCH</div>
+      </a>
+      <a href="add to cart.html" class="text-dark text-decoration-none text-center small">
+        <div>🛒</div>
+        <div>CART</div>
+      </a>
+      <a href="signup.html" class="text-dark text-decoration-none text-center small">
+        <div>👤</div>
+        <div>PROFILE</div>
+      </a>
+    </div>
+  </nav>
+  <div id="heroCarousel" class="carousel slide" data-bs-ride="carousel">
+    <!-- Indicators -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class="active"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1"></button>
+      <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2"></button>
+    </div>
+
+    <!-- Slides -->
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="img1.webp" class="d-block w-100" alt="Slide 1">
+      </div>
+      <div class="carousel-item">
+        <img src="img 2.jpg" class="d-block w-100" alt="Slide 2">
+      </div>
+      <div class="carousel-item">
+        <img src="img 3.jpg" class="d-block w-100" alt="Slide 3">
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+
+
+
+    <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <!-- SHOP BY CATEGORY -->
+  <section class="bg-light py-5">
+    <div class="container">
+      <h2 class="text-center fw-bold mb-5" style="color: #ff4da6;">SHOP BY CATEGORY</h2>
+
+      <div class="row text-center g-4">
+
+        <div class="col-md-3 text-center">
+          <a href="kurtas page.html" class="category-card">
+            <img src="kurta image.1.webp" class="img-fluid rounded shadow-sm">
+            <h6 class="mt-3">Ethnic Wear</h6>
+          </a>
+        </div>
+
+        <div class="col-md-3 text-center">
+          <a href="dresses.html" class="category-card">
+            <img src="western wear.avif" class="img-fluid rounded shadow-sm">
+            <h6 class="mt-3">Western Wear</h6>
+          </a>
+        </div>
+
+        <div class="col-md-3 text-center">
+          <a href="co-ord set.html" class="category-card">
+            <img src="casual wear.avif" class="img-fluid rounded shadow-sm">
+            <h6 class="mt-3">Casual Wear</h6>
+          </a>
+        </div>
+
+        <div class="col-md-3 text-center">
+          <a href="dresses.html" class="category-card">
+            <img src="partywear.avif" class="img-fluid rounded shadow-sm">
+            <h6 class="mt-3">Party Wear</h6>
+          </a>
+        </div>
+      </div>
+
+    </div>
+    </div>
+  </section>
+  <!--first order-->
+  <section class="text-center py-5" style="background: #ff4da6 ;">
+    <h3 class="fw-bold">Get 10% OFF Your First Order 💖</h3>
+    <p>Subscribe for latest fashion updates</p>
+
+    <div class="d-flex justify-content-center">
+      <input type="email" placeholder="Enter your email" style="max-width:300px;" class="form-control me-2">
+      <button class="btn btn-danger">Subscribe</button>
+    </div>
+  </section>
+  </section>
+  <!--new arrivals-->
+  <section class="py-5">
+    <div class="container text-center">
+      <h2 class="fw-bold mb-5" style="color: #ff4da6;">NEW ARRIVALS ✨</h2>
+      <div class="row g-4">
+        <div class="col-md-3">
+          <a href="kurtas page.html" class="text-decoration-none text-dark">
+            <div class="card product-card">
+              <img src="kurta image 10.jpg" class="card-img-top">
+              <div class="card-body">
+                <h6>Floral Dress</h6>
+                <p class="text-danger fw-bold">₹1199</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-3">
+          <a href="tops.html" class="text-decoration-none text-dark">
+            <div class="card product-card">
+              <img src="t1.avif" class="card-img-top">
+              <div class="card-body">
+                <h6>Casual Top</h6>
+                <p class="text-danger fw-bold">₹699</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-3">
+          <a href="co-ord set.html" class="text-decoration-none text-dark">
+            <div class="card product-card">
+              <img src="c1.avif" class="card-img-top">
+              <div class="card-body">
+                <h6>Co-ord Set</h6>
+                <p class="text-danger fw-bold">₹1599</p>
+              </div>
+            </div>
+          </a>
+        </div>
+
+        <div class="col-md-3">
+          <a href="dresses.html" class="text-decoration-none text-dark">
+            <div class="card product-card">
+              <img src="floral dress.avif" class="card-img-top">
+              <div class="card-body">
+                <h6>Party Wear</h6>
+                <p class="text-danger fw-bold">₹1899</p>
+              </div>
+            </div>
+          </a>
+        </div>
+      </div>
+  </section>
+  <!-- OFFER SECTION -->
+  <section class="text-center py-5" style="background:#ff4da6; color:white;">
+    <h2 class="fw-bold">FLAT 50% OFF</h2>
+    <p>On Selected Styles</p>
+
+    <a href="offers.html">
+      <button class="btn btn-light fw-semibold">Shop Now</button>
+    </a>
+
+  </section>
+  </section>
+  <!-- WHY CHOOSE US -->
+  <section class="bg-light py-5">
+    <div class="container text-center">
+
+      <div class="row">
+
+        <div class="col-md-3">
+          <h1>🚚</h1>
+          <h6>Free Shipping</h6>
+        </div>
+
+        <div class="col-md-3">
+          <h1>↩</h1>
+          <h6>Easy Returns</h6>
+        </div>
+
+        <div class="col-md-3">
+          <h1>🔒</h1>
+          <h6>Secure Payment</h6>
+        </div>
+
+        <div class="col-md-3">
+          <h1>💰</h1>
+          <h6>Cash on Delivery</h6>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <!-- FOOTER -->
+  <footer class="bg-dark text-white pt-5 pb-3">
+    <div class="container text-center">
+
+      <h5>ClothingStore</h5>
+      <p>Trendy Fashion at Your Fingertips</p>
+
+      <div class="mb-3">
+        <a href="about us.html" class="text-white me-3">About</a>
+        <a href="contact us.html" class="text-white me-3">Contact</a>
+        <a href="returns.html" class="text-white me-3">Returns</a>
+        <a href="privacy.html" class="text-white">Privacy</a>
+      </div>
+
+      <p class="small">© 2026 ClothingStore. All Rights Reserved.</p>
+
+    </div>
+  </footer>
+  <script>
+    // Show splash screen for 2 seconds
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("splash").style.display = "none";
+        document.getElementById("mainContent").style.display = "block";
+      }, 2000);
+    });
+  </script>
+  </script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

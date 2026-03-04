@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lehenga Collection</title>
+
+<style>
+body{font-family:Arial;background:#ffe6f0;margin:0}
+
+/* HEADER */
+.header{
+  background:#ff4da6;
+  color:white;
+  padding:15px;
+  text-align:center;
+  font-size:22px;
+  font-weight:bold;
+}
+
+/* COLLECTION */
+.product-section{
+  max-width:1200px;
+  margin:auto;
+  padding:20px;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-bottom:20px;
+}
+
+select{
+  padding:8px;
+  border-radius:6px;
+  border:1px solid #ff80b3;
+}
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:20px;
+}
+
+.product-card{
+  background:#fff;
+  padding:15px;
+  border-radius:15px;
+  box-shadow:0 4px 12px rgba(0,0,0,0.1);
+  cursor:pointer;
+  transition:.3s;
+}
+
+.product-card:hover{transform:translateY(-6px);}
+
+.product-card img{width:100%;border-radius:10px;}
+
+.product-name{font-weight:bold;color:#b30059;margin-top:10px;}
+.product-price{color:#ff4da6;font-weight:bold;margin:5px 0}
+
+/* FULL VIEW */
+
+#productView{
+  display:none;
+  max-width:1100px;
+  margin:40px auto;
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:40px;
+  align-items:center;
+}
+
+#productView img{width:380px;border-radius:15px;}
+
+.details{flex:1;}
+
+.price{
+  font-size:28px;
+  color:#ff4da6;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+/* SIZE */
+.sizes button{
+  border:1px solid #ccc;
+  background:white;
+  padding:10px 15px;
+  margin-right:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.sizes button.active{
+  border-color:#ff4da6;
+  color:#ff4da6;
+  font-weight:bold;
+}
+
+/* BUTTONS */
+.btn{
+  background:#ff4da6;
+  color:white;
+  padding:14px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin-right:15px;
+}
+
+.back{
+  background:#e0e0e0;
+  color:#333;
+  margin-bottom:20px;
+}
+/* ===== COMMON CONTROLS (Filter + Sort) ===== */
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-bottom:20px;
+}
+
+/* Works for ANY dropdown */
+
+.controls select,
+.sort select,
+.filter select,
+select{
+  padding:9px 12px;
+  border-radius:8px;
+  border:1px solid #ff80b3;
+  background:#fff;
+  font-size:14px;
+  cursor:pointer;
+  transition:.2s;
+  min-width:160px;
+}
+
+/* Hover */
+
+.controls select:hover,
+select:hover{
+  border-color:#ff4da6;
+}
+
+/* Focus */
+
+.controls select:focus,
+select:focus{
+  outline:none;
+  border-color:#ff4da6;
+  box-shadow:0 0 0 2px rgba(255,77,166,0.2);
+}
+
+/* Mobile friendly */
+
+@media(max-width:600px){
+  .controls{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .controls select{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Lehenga Collection</div>
+
+<!-- COLLECTION -->
+<div class="product-section" id="collection">
+
+<div class="controls">
+
+<select id="filter">
+<option value="all">All</option>
+<option value="net">Net</option>
+<option value="silk">Silk</option>
+<option value="velvet">Velvet</option>
+</select>
+
+<select id="sort">
+<option value="latest">Latest</option>
+<option value="low-high">Price: Low → High</option>
+<option value="high-low">Price: High → Low</option>
+</select>
+
+</div>
+
+<div class="product-grid" id="products"></div>
+</div>
+
+<!-- FULL VIEW -->
+<div id="productView">
+
+<button class="btn back" onclick="goBack()">⬅ Back to Collection</button>
+
+<div class="product-container">
+
+<img id="pImg">
+
+<div class="details">
+<h1 id="pName"></h1>
+<p class="price" id="pPrice"></p>
+
+<h3>Select Size</h3>
+
+<div class="sizes">
+<button onclick="selectSize(this)">S</button>
+<button onclick="selectSize(this)">M</button>
+<button onclick="selectSize(this)">L</button>
+<button onclick="selectSize(this)">XL</button>
+</div>
+
+<br><br>
+
+<button class="btn">Add to Cart</button>
+<button class="btn" onclick="window.location='payment.html'">Buy Now</button>
+
+</div>
+</div>
+</div>
+
+<script>
+
+const productsData = [
+  { name:"Net Party Wear Lehenga", price:4999, category:"net", img:"L1.avif" },
+  { name:"Silk Wedding Lehenga", price:9999, category:"silk", img:"L2.avif" },
+  { name:"Velvet Bridal Lehenga", price:12999, category:"velvet", img:"L3.avif" },
+  { name:"Designer Net Lehenga", price:7499, category:"net", img:"L4.avif" },
+  { name:"Traditional Silk Lehenga", price:8999, category:"silk", img:"L5.avif" },
+  { name:"Royal Velvet Lehenga", price:14999, category:"velvet", img:"L6.avif" },
+  { name:"Embroidered Net Lehenga", price:6799, category:"net", img:"L7.avif" },
+  { name:"Festive Silk Lehenga", price:8299, category:"silk", img:"L8.avif" },
+  { name:"Heavy Velvet Lehenga", price:15999, category:"velvet", img:"L9.avif" },
+  { name:"Light Net Lehenga", price:5599, category:"net", img:"L10.avif" },
+  { name:"Ethnic Silk Lehenga", price:9199, category:"silk", img:"L11.avif" },
+  { name:"Premium Velvet Lehenga", price:17999, category:"velvet", img:"L12.avif" }
+];
+
+const container = document.getElementById("products");
+const filter = document.getElementById("filter");
+const sort = document.getElementById("sort");
+
+/* RENDER */
+
+function renderProducts(list){
+  container.innerHTML="";
+  list.forEach((p,i)=>{
+    container.innerHTML += `
+      <div class="product-card" onclick="showProduct(${i})">
+        <img src="${p.img}">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price}</div>
+      </div>
+    `;
+  });
+}
+
+renderProducts(productsData);
+
+/* FILTER */
+
+filter.onchange = () => {
+  const v = filter.value;
+  const filtered = v === "all"
+    ? productsData
+    : productsData.filter(p => p.category === v);
+  renderProducts(filtered);
+};
+
+/* SORT */
+
+sort.onchange = () => {
+  let sorted = [...productsData];
+
+  if(sort.value === "low-high") sorted.sort((a,b)=>a.price-b.price);
+  if(sort.value === "high-low") sorted.sort((a,b)=>b.price-a.price);
+
+  renderProducts(sorted);
+};
+
+/* VIEW */
+
+function showProduct(i){
+  const p = productsData[i];
+  collection.style.display = "none";
+  productView.style.display = "block";
+
+  pImg.src = p.img;
+  pName.textContent = p.name;
+  pPrice.textContent = "₹" + p.price;
+}
+
+function goBack(){
+  productView.style.display = "none";
+  collection.style.display = "block";
+}
+
+/* SIZE */
+
+function selectSize(btn){
+  document.querySelectorAll(".sizes button")
+    .forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Men Jeans Collection</title>
+
+<style>
+body{
+  font-family:'Segoe UI',Arial;
+  background:#fff0f6;
+  margin:0;
+  color:#333;
+}
+
+.header{
+  background:#ff4da6;
+  color:white;
+  padding:15px 30px;
+  font-size:22px;
+  font-weight:bold;
+  text-align:center;
+}
+
+.product-section{
+  max-width:1200px;
+  margin:30px auto;
+  padding:0 20px;
+}
+
+/* SORTING - REFERENCE THEME */
+.sort-box{
+  display:flex;
+  justify-content:flex-end;
+  margin-bottom:25px;
+}
+
+.sort-box select{
+  padding:10px 14px;
+  border-radius:25px;
+  border:2px solid #ff4da6;
+  background:white;
+  color:#b30059;
+  font-weight:600;
+  cursor:pointer;
+  outline:none;
+  transition:.3s;
+}
+
+.sort-box select:hover{
+  background:#fff0f6;
+}
+
+.sort-box select:focus{
+  box-shadow:0 0 0 3px rgba(255,77,166,0.2);
+}
+
+/* GRID */
+
+.product-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:25px;
+}
+
+.product-card{
+  background:white;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.08);
+  padding:15px;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.product-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.15);
+}
+
+.product-card img{
+  width:100%;
+  border-radius:12px;
+}
+
+.product-name{
+  font-weight:600;
+  margin-top:10px;
+  color:#b30059;
+}
+
+.product-price{
+  color:#ff4da6;
+  font-weight:bold;
+  margin-top:5px;
+}
+
+/* PRODUCT VIEW */
+
+#productView{
+  display:none;
+  max-width:1100px;
+  margin:40px auto;
+  background:white;
+  padding:35px;
+  border-radius:18px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.1);
+}
+
+.product-container{
+  display:flex;
+  flex-wrap:wrap;
+  gap:40px;
+  align-items:center;
+}
+
+#productView img{
+  width:380px;
+  border-radius:15px;
+  box-shadow:0 4px 15px rgba(0,0,0,0.15);
+}
+
+.details{flex:1;}
+
+.details h1{color:#b30059;}
+
+.price{
+  font-size:28px;
+  color:#ff4da6;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+/* SIZE */
+
+.sizes button{
+  border:1px solid #ccc;
+  background:white;
+  padding:10px 15px;
+  margin-right:10px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+.sizes button.active{
+  border-color:#ff4da6;
+  color:#ff4da6;
+  font-weight:bold;
+}
+
+/* BUTTONS */
+
+.actions{margin-top:25px;}
+
+.btn{
+  background:#ff4da6;
+  color:white;
+  padding:14px 28px;
+  border:none;
+  border-radius:30px;
+  font-size:16px;
+  cursor:pointer;
+  margin-right:15px;
+}
+
+.btn:hover{background:#d63384;}
+
+.back{
+  background:#e0e0e0;
+  color:#333;
+  margin-bottom:20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">Men Jeans Collection</div>
+
+<div class="product-section" id="collection">
+
+<div class="sort-box">
+  <select onchange="sortProducts(this.value)">
+    <option value="default">Sort By</option>
+    <option value="low">Price: Low to High</option>
+    <option value="high">Price: High to Low</option>
+    <option value="az">Name: A to Z</option>
+  </select>
+</div>
+
+<div class="product-grid" id="products"></div>
+</div>
+
+<!-- PRODUCT VIEW -->
+
+<div id="productView">
+
+<button class="btn back" onclick="goBack()">⬅ Back to Collection</button>
+
+<div class="product-container">
+
+<img id="pImg">
+
+<div class="details">
+<h1 id="pName"></h1>
+<p class="price" id="pPrice"></p>
+
+<h3>Select Size</h3>
+
+<div class="sizes">
+<button onclick="selectSize(this)">28</button>
+<button onclick="selectSize(this)">30</button>
+<button onclick="selectSize(this)">32</button>
+<button onclick="selectSize(this)">34</button>
+<button onclick="selectSize(this)">36</button>
+</div>
+
+<div class="actions">
+<button class="btn" onclick="addToCart()">Add to Cart</button>
+<button class="btn" onclick="window.location='payment.html'">Buy Now</button>
+</div>
+
+</div>
+</div>
+</div>
+
+<script>
+
+let productsData = [
+  { name:"Slim Fit Blue Jeans", price:1699, img:"jeans1.avif" },
+  { name:"Regular Fit Denim Jeans", price:1499, img:"jeans2.avif" },
+  { name:"Ripped Casual Jeans", price:1799, img:"jeans3.avif" },
+  { name:"Black Skinny Jeans", price:1599, img:"jeans4.avif" },
+  { name:"Stretch Comfort Jeans", price:1899, img:"jeans5.avif" },
+  { name:"Classic Straight Jeans", price:1399, img:"jeans6.avif" },
+  { name:"Washed Blue Denim Jeans", price:1599, img:"jeans7.avif" },
+  { name:"Dark Shade Slim Jeans", price:1699, img:"jeans8.avif" },
+  { name:"Vintage Style Jeans", price:1999, img:"jeans9.avif" },
+  { name:"Casual Everyday Jeans", price:1299, img:"jeans10.avif" },
+  { name:"Premium Stretch Jeans", price:2099, img:"jeans11.avif" },
+  { name:"Designer Fashion Jeans", price:2299, img:"jeans12.avif" }
+];
+
+const container = document.getElementById("products");
+
+function renderProducts(data){
+  container.innerHTML="";
+  data.forEach((p,i)=>{
+    container.innerHTML += `
+      <div class="product-card" onclick="showProduct(${i})">
+        <img src="${p.img}">
+        <div class="product-name">${p.name}</div>
+        <div class="product-price">₹${p.price}</div>
+      </div>
+    `;
+  });
+}
+
+renderProducts(productsData);
+
+function sortProducts(type){
+  let sorted = [...productsData];
+
+  if(type==="low") sorted.sort((a,b)=>a.price-b.price);
+  else if(type==="high") sorted.sort((a,b)=>b.price-a.price);
+  else if(type==="az") sorted.sort((a,b)=>a.name.localeCompare(b.name));
+
+  renderProducts(sorted);
+}
+
+function showProduct(i){
+  const p = productsData[i];
+
+  collection.style.display="none";
+  productView.style.display="block";
+
+  pImg.src = p.img;
+  pName.textContent = p.name;
+  pPrice.textContent = "₹"+p.price;
+}
+
+function goBack(){
+  productView.style.display="none";
+  collection.style.display="block";
+}
+
+function selectSize(btn){
+  document.querySelectorAll(".sizes button")
+    .forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+}
+
+function addToCart(){
+  alert("Product added to cart ✅");
+}
+
+</script>
+
+</body>
+</html>
